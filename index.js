@@ -21,12 +21,12 @@ function getSearchQuery(callback) {
     var questions = [{
         name: 'query',
         type: 'input',
-        message: 'enter the keywords:',
+        message: 'Enter the keywords:',
         validate: function(value) {
             if (value.length) {
                 return true;
             } else {
-                return 'duh! please enter some words to search';
+                return 'Whaa! Please enter some words to search';
             }
         }
     }];
@@ -37,13 +37,14 @@ function getSearchQuery(callback) {
 clear();
 console.log(
     chalk.yellow(
-        figlet.textSync('stacko', {
+        figlet.textSync('STACKO', {
             horizontalLayout: 'full'
         })
     )
 );
 
-console.log('\ncurrent search is restricted to '+ chalk.yellow(50) +' results');
+console.log('\nCurrent search is restricted to '+ chalk.yellow(50) +' results');
+console.log('Hold command or equivalent key to open url in browser');
 
 var query = '';
 getSearchQuery(function() {
@@ -64,7 +65,7 @@ getSearchQuery(function() {
         if (err) throw err;
         var final = {};
         if (results.items.length == 0) {
-            console.log(chalk.red('\nnothing found'));
+            console.log(chalk.red('\nNothing found! :('));
             process.exit();
         }
         console.log('\n');
@@ -72,10 +73,10 @@ getSearchQuery(function() {
             console.log(chalk.bold(obj.title));
 
             // TODO : link url with text, open browser on click
-            // console.log(chalk.blue(obj.link)); // the url
+            console.log(chalk.blue(obj.link)); // the url
         });
 
-        console.log('\nfound ' + chalk.yellow(results.items.length) + ' results');
+        console.log('\nFound ' + chalk.yellow(results.items.length) + ' results');
 
         status.stop();
     });
